@@ -274,10 +274,12 @@ html, body {
 
 .search-overlay {
   position: fixed;
-  inset: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 110px;
   z-index: 200;
-  background: rgba(0, 8, 20, 0.78);
-  backdrop-filter: blur(6px);
+  background: linear-gradient(to top, rgba(0, 8, 20, 0.95) 60%, transparent 100%);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -383,7 +385,7 @@ html, body {
 ========================================= */
 
 .portal-category {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 22px;
   padding: 16px 12px;

@@ -54,10 +54,6 @@ function closeSearch() {
 fabSearch.addEventListener("click", openSearch);
 searchClose.addEventListener("click", closeSearch);
 
-searchOverlay.addEventListener("click", (e) => {
-  if (e.target === searchOverlay) closeSearch();
-});
-
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeSearch();
 });
