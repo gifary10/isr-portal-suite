@@ -183,15 +183,117 @@ html, body {
    LOGO
 ========================================= */
 
+.logo-wrapper {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+/* Hexagon shape utama */
+.logo-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: none;
+}
+
+/* Ring berputar dengan dash pattern */
+.logo-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  animation: spinRing 12s linear infinite;
+}
+
+@keyframes spinRing {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* 4 dot sudut menggunakan box-shadow trick */
+.logo-wrapper .logo-dots {
+  position: absolute;
+  inset: -12px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.logo-wrapper .logo-dots::before,
+.logo-wrapper .logo-dots::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform-origin: 0 0;
+}
+
+.logo-wrapper .logo-dots::before {
+  box-shadow:
+    46px -46px 0 0 rgba(255,255,255,0.9),
+    46px  46px 0 0 rgba(255,255,255,0.9),
+   -46px -46px 0 0 rgba(255,255,255,0.9),
+   -46px  46px 0 0 rgba(255,255,255,0.9);
+  animation: spinRing 12s linear infinite;
+}
+
+.logo-wrapper .logo-dots::after {
+  box-shadow:
+    54px   0px 0 0 rgba(255,255,255,0.5),
+   -54px   0px 0 0 rgba(255,255,255,0.5),
+     0px  54px 0 0 rgba(255,255,255,0.5),
+     0px -54px 0 0 rgba(255,255,255,0.5);
+  animation: spinRing 12s linear infinite reverse;
+}
+
+/* Corner accent lines */
+.logo-wrapper .logo-corner {
+  position: absolute;
+  inset: 4px;
+  pointer-events: none;
+}
+
+.logo-wrapper .logo-corner::before,
+.logo-wrapper .logo-corner::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: rgba(255,255,255,0.7);
+  border-style: solid;
+}
+
+.logo-wrapper .logo-corner::before {
+  top: 0;
+  left: 0;
+  border-width: 2px 0 0 2px;
+  border-radius: 3px 0 0 0;
+}
+
+.logo-wrapper .logo-corner::after {
+  bottom: 0;
+  right: 0;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 3px 0;
+}
+
 .app-logo {
-  width: 64px;
-  height: 64px;
+  width: 52px;
+  height: 52px;
   object-fit: contain;
   flex-shrink: 0;
-  filter:
-    drop-shadow(0 0 18px rgba(251,82,1,0.22))
-    drop-shadow(0 0 36px rgba(0,122,255,0.15));
-  animation: logoFloat 4s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes logoFloat {
@@ -385,7 +487,7 @@ html, body {
 ========================================= */
 
 .portal-category {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.35);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: 22px;
   padding: 16px 12px;
@@ -462,12 +564,55 @@ html, body {
 }
 
 .icon-menu img {
-  width: 46px;
-  height: 46px;
+  width: 38px;
+  height: 38px;
   object-fit: contain;
   user-select: none;
   -webkit-user-drag: none;
-  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+  position: relative;
+  z-index: 1;
+}
+
+/* Wrapper icon */
+.icon-img-wrap {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Circle putih di belakang icon */
+.icon-img-wrap::before {
+  content: "";
+  position: absolute;
+
+  /* ukuran lingkaran */
+  width: 20px;
+  height: 20px;
+
+  /* warna isi */
+  background: var(--text-soft);
+
+  /* membuat jadi circle */
+  border-radius: 40%;
+
+  /* border / glow putih */
+  box-shadow:
+    0 0 0 2px var(--white),
+    0 0 4px var(--white),
+    0 0 8px rgba(255,255,255,0.35);
+
+  /* posisi */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.icon-menu:active .icon-img-wrap::before {
+  background: #e8e8e8;
 }
 
 .icon-menu span {
